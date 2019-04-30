@@ -1,4 +1,5 @@
-var type = "normal";
+var type = "normal",
+  secondType = "trunk";
 
 window.addEventListener("message", function (event) {
     if (event.data.action == "display") {
@@ -6,8 +7,9 @@ window.addEventListener("message", function (event) {
 
         if (type === "normal") {
             $(".info-div").hide();
-        } else if (type === "trunk") {
+        } else if (type === "second") {
             $(".info-div").show();
+            secondType = event.data.secondType;
         }
 
         $(".ui").fadeIn();
@@ -141,8 +143,8 @@ $(document).ready(function () {
             itemData = ui.draggable.data("item");
             itemInventory = ui.draggable.data("inventory");
 
-            if (type === "trunk" && itemInventory === "second") {
-                $.post("http://rs_inventory/TakeFromTrunk", JSON.stringify({ item: itemData, number: parseInt($("#count").val()) }));
+            if (type === "second" && itemInventory === "second") {
+                $.post("http://rs_inventory/TakeFromSecond", JSON.stringify({ item: itemData, number: parseInt($("#count").val()), type: secondType }));
             }
         }
     });
@@ -152,8 +154,8 @@ $(document).ready(function () {
             itemData = ui.draggable.data("item");
             itemInventory = ui.draggable.data("inventory");
 
-            if (type === "trunk" && itemInventory === "main") {
-                $.post("http://rs_inventory/PutIntoTrunk", JSON.stringify({ item: itemData, number: parseInt($("#count").val()) }));
+            if (type === "second" && itemInventory === "main") {
+                $.post("http://rs_inventory/PutIntoSecond", JSON.stringify({ item: itemData, number: parseInt($("#count").val()), type: secondType }));
             }
         }
     });
@@ -170,7 +172,7 @@ $.widget('ui.dialog', $.ui.dialog, {
     options: {
         // Determine if clicking outside the dialog shall close it
         clickOutside: false,
-        // Element (id or class) that triggers the dialog opening 
+        // Element (id or class) that triggers the dialog opening
         clickOutsideTrigger: ''
     },
     open: function () {
@@ -192,7 +194,7 @@ $.widget('ui.dialog', $.ui.dialog, {
     close: function () {
         // Remove document wide click handler for the current dialog
         $(document).off('click.ui.dialogClickOutside' + this.eventNamespace);
-        // Invoke parent close method 
+        // Invoke parent close method
         this._super();
     },
 });

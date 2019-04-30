@@ -76,7 +76,7 @@ local Keys = {
     ["N9"] = 118
 }
 
-local trunkData = nil
+local secondData = nil
 local isInInventory = false
 ESX = nil
 
@@ -117,14 +117,15 @@ function openInventory()
     SetNuiFocus(true, true)
 end
 
-function openTrunkInventory()
+function openSecondInventory(type)
     loadPlayerInventory()
     isInInventory = true
 
     SendNUIMessage(
         {
             action = "display",
-            type = "trunk"
+            type = "second",
+            secondType = type
         }
     )
 
@@ -171,7 +172,7 @@ RegisterNUICallback(
         end
 
         if not foundPlayers then
-			
+
 		ESX.ShowNotification(_U("players_nearby"))
         else
             SendNUIMessage(
@@ -189,7 +190,7 @@ RegisterNUICallback(
 )
 
 RegisterNUICallback(
-    "PutIntoTrunk",
+    "PutIntoSecond",
     function(data, cb)
         if IsPedSittingInAnyVehicle(playerPed) then
             return
@@ -202,7 +203,10 @@ RegisterNUICallback(
                 count = GetAmmoInPedWeapon(PlayerPedId(), GetHashKey(data.item.name))
             end
 
-            TriggerServerEvent("esx_trunk:putItem", trunkData.plate, data.item.type, data.item.name, count, trunkData.max, trunkData.myVeh, data.item.label)
+            if data.type == "truck" then
+              TriggerServerEvent("esx_trunk:putItem", secondData.plate, data.item.type, data.item.name, count, secondData.max, secondData.myVeh, data.item.label)
+            elseif data.type == "property" then
+              TriggerServerEvent("esx_property:putItem", )
         end
 
         Wait(500)
@@ -213,14 +217,18 @@ RegisterNUICallback(
 )
 
 RegisterNUICallback(
-    "TakeFromTrunk",
+    "TakeFromSecond",
     function(data, cb)
         if IsPedSittingInAnyVehicle(playerPed) then
             return
         end
 
         if type(data.number) == "number" and math.floor(data.number) == data.number then
-            TriggerServerEvent("esx_trunk:getItem", trunkData.plate, data.item.type, data.item.name, tonumber(data.number), trunkData.max, trunkData.myVeh)
+            if data.type == "trunk" then
+              TriggerServerEvent("esx_trunk:getItem", secondData.plate, data.item.type, data.item.name, tonumber(data.number), secondData.max, secondData.myVeh)
+            elseif data.type == "property" then
+              TriggerServerEvent("esx_property:getItem",secondData.owner, data.item.type, data.item.name, tonumber(data.number))
+            end
         end
 
         Wait(500)
@@ -398,8 +406,8 @@ RegisterNetEvent("esx_inventoryhud:openTrunkInventory")
 AddEventHandler(
     "esx_inventoryhud:openTrunkInventory",
     function(data, blackMoney, inventory, weapons)
-        setTrunkInventoryData(data, blackMoney, inventory, weapons)
-        openTrunkInventory()
+        setSecondInventoryData(data, blackMoney, inventory, weapons)
+        openSecondInventory("trunk")
     end
 )
 
@@ -407,12 +415,12 @@ RegisterNetEvent("esx_inventoryhud:refreshTrunkInventory")
 AddEventHandler(
     "esx_inventoryhud:refreshTrunkInventory",
     function(data, blackMoney, inventory, weapons)
-        setTrunkInventoryData(data, blackMoney, inventory, weapons)
+        setSecondInventoryData(data, blackMoney, inventory, weapons)
     end
 )
 
-function setTrunkInventoryData(data, blackMoney, inventory, weapons)
-    trunkData = data
+function setSecondInventoryData(data, blackMoney, inventory, weapons)
+    secondData = data
 
     SendNUIMessage(
         {
@@ -481,6 +489,24 @@ function setTrunkInventoryData(data, blackMoney, inventory, weapons)
         }
     )
 end
+
+RegisterNetEvent("esx_inventoryhud:openPropertyInventory")
+AddEventHandler(
+  "esx_inventoryhud:openPropertyInventory",
+  function(data, blackMoney, invite, weapons)
+    setSecondInventoryData(data, blackMoney, inventory, weapons)
+    openSecondInventory("property")
+  end
+)
+
+RegisterNetEvent("esx_inventoryhud:refreshPropertyInventory")
+AddEventHandler(
+  "esx_inventoryhud:refreshPropertyInventory",
+  function(data, blackMoney, inventory, weapons)
+    setSecondInventoryData(data, blackMoney, inventory, weapons)
+  end
+)
+
 
 Citizen.CreateThread(
     function()
