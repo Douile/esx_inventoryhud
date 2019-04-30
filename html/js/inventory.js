@@ -62,13 +62,13 @@ window.addEventListener("message", function (event) {
         $(".nearbyPlayerButton").click(function () {
             $("#dialog").dialog("close");
             player = $(this).data("player");
-            $.post("http://esx_inventoryhud/GiveItem", JSON.stringify({ player: player, item: event.data.item, number: parseInt($("#count").val()) }));
+            $.post("http://rs_inventory/GiveItem", JSON.stringify({ player: player, item: event.data.item, number: parseInt($("#count").val()) }));
         });
     }
 });
 
 function closeInventory() {
-    $.post("http://esx_inventoryhud/NUIFocusOff", JSON.stringify({}));
+    $.post("http://rs_inventory/NUIFocusOff", JSON.stringify({}));
 }
 
 function inventorySetup(items) {
@@ -111,7 +111,7 @@ $(document).ready(function () {
         drop: function (event, ui) {
             itemData = ui.draggable.data("item");
             if (itemData.usable) {
-                $.post("http://esx_inventoryhud/UseItem", JSON.stringify({ item: itemData }));
+                $.post("http://rs_inventory/UseItem", JSON.stringify({ item: itemData }));
             }
         }
     });
@@ -121,7 +121,7 @@ $(document).ready(function () {
         drop: function (event, ui) {
             itemData = ui.draggable.data("item");
             if (itemData.canRemove) {
-                $.post("http://esx_inventoryhud/GetNearPlayers", JSON.stringify({ item: itemData }));
+                $.post("http://rs_inventory/GetNearPlayers", JSON.stringify({ item: itemData }));
             }
         }
     });
@@ -131,7 +131,7 @@ $(document).ready(function () {
         drop: function (event, ui) {
             itemData = ui.draggable.data("item");
             if (itemData.canRemove) {
-                $.post("http://esx_inventoryhud/DropItem", JSON.stringify({ item: itemData, number: parseInt($("#count").val()) }));
+                $.post("http://rs_inventory/DropItem", JSON.stringify({ item: itemData, number: parseInt($("#count").val()) }));
             }
         }
     });
@@ -142,7 +142,7 @@ $(document).ready(function () {
             itemInventory = ui.draggable.data("inventory");
 
             if (type === "trunk" && itemInventory === "second") {
-                $.post("http://esx_inventoryhud/TakeFromTrunk", JSON.stringify({ item: itemData, number: parseInt($("#count").val()) }));
+                $.post("http://rs_inventory/TakeFromTrunk", JSON.stringify({ item: itemData, number: parseInt($("#count").val()) }));
             }
         }
     });
@@ -153,7 +153,7 @@ $(document).ready(function () {
             itemInventory = ui.draggable.data("inventory");
 
             if (type === "trunk" && itemInventory === "main") {
-                $.post("http://esx_inventoryhud/PutIntoTrunk", JSON.stringify({ item: itemData, number: parseInt($("#count").val()) }));
+                $.post("http://rs_inventory/PutIntoTrunk", JSON.stringify({ item: itemData, number: parseInt($("#count").val()) }));
             }
         }
     });

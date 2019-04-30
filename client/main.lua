@@ -171,15 +171,8 @@ RegisterNUICallback(
         end
 
         if not foundPlayers then
-            exports.pNotify:SendNotification(
-                {
-                    text = _U("players_nearby"),
-                    type = "error",
-                    timeout = 3000,
-                    layout = "bottomCenter",
-                    queue = "inventoryhud"
-                }
-            )
+			
+		ESX.ShowNotification(_U("players_nearby"))
         else
             SendNUIMessage(
                 {
@@ -291,15 +284,7 @@ RegisterNUICallback(
             Wait(500)
             loadPlayerInventory()
         else
-            exports.pNotify:SendNotification(
-                {
-                    text = _U("player_nearby"),
-                    type = "error",
-                    timeout = 3000,
-                    layout = "bottomCenter",
-                    queue = "inventoryhud"
-                }
-            )
+ 			ESX.ShowNotification(_U("player_nearby"))
         end
         cb("ok")
     end
@@ -438,7 +423,7 @@ function setTrunkInventoryData(data, blackMoney, inventory, weapons)
 
     items = {}
 
-    if blackMoney >= 0 then
+    if blackMoney > 0 then
         accountData = {
             label = _U("black_money"),
             count = blackMoney,

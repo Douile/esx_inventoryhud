@@ -17,7 +17,7 @@
     top: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.35);
+    background-color: rgba(12, 9, 17, 0.35);
     display: none;
     z-index: 0;
 }
@@ -29,8 +29,8 @@
     transform: translate(-50%, -50%);
     width: 1550px;
     height: 600px;
-    box-shadow: 1px 1px 10px rgba(0, 0, 0, .4);
-    background-color: rgba(17, 5, 17, 0.2);
+    box-shadow: 1px 1px 10px rgba(12, 9, 17, 0.4);
+    background-color: rgba(12, 9, 17, 0.125);
 }
 
 #playerInventory {
@@ -45,7 +45,7 @@
     height: 600px;
     float: left;
     position: relative;
-    background-color: rgba(17, 5, 17, 0.2);
+    background-color: rgba(12, 9, 17, 0.1);
     left: 0;
     top: 0;
 }
@@ -77,7 +77,6 @@ input[type=number] {
     float: left;
     width: 117px;
     height: 117px;
-    background-color: rgba(17, 5, 17, 0.6);
     margin: 2px;
     position: relative;
 }
@@ -105,7 +104,7 @@ input[type=number] {
     min-height: 20px;
     z-index: 500;
     font-size: 12px;
-    background-color: rgba(17, 5, 17, 0.8);
+    background-color: rgba(12, 9, 17, 0.19);
 }
 
 .ui-draggable-dragging .item-name,
@@ -125,7 +124,7 @@ input[type=number] {
 .info-div {
     text-align: center;
     padding: 5px;
-    background-color: rgba(17, 5, 17, 0.6);
+    background-color: rgba(12, 9, 17, 0.19);
     width: 80%;
     position: absolute;
     left: 50%;
@@ -143,7 +142,7 @@ input[type=number] {
 .control {
     width: 150px;
     height: 40px;
-    background-color: rgba(17, 5, 17, 0.6);
+    background-color: rgba(12, 9, 17, 0.21);
     margin: 10px;
     text-align: center;
     vertical-align: middle;
@@ -151,7 +150,7 @@ input[type=number] {
 }
 
 .control.disabled {
-    background-color: rgba(17, 5, 17, 0.1);
+    background-color: rgba(12, 9, 17, 0.1);
 }
 
 .hoverControl {
@@ -175,13 +174,11 @@ input[type=number] {
 #playerInventory::-webkit-scrollbar,
 #otherInventory::-webkit-scrollbar {
     width: 10px;
-    background-color: rgba(17, 5, 17, 0.2);
 }
 
 #playerInventory::-webkit-scrollbar-thumb,
 #otherInventory::-webkit-scrollbar-thumb {
-    background-color: rgba(17, 5, 17, 1);
-    border: 2px solid rgba(17, 5, 17, 1);
+    background-color: rgba(63, 64, 62, 0.65);
 }
 
 .nearbyPlayerButton {
@@ -202,7 +199,7 @@ input[type=number] {
 }
 
 .nearbyPlayerButton:hover {
-    background-color: rgba(34, 29, 46, 0.8);
+    background-color: rgba(12, 9, 17, 0.8);
 }
 
 #noSecondInventoryMessage {
