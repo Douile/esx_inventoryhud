@@ -207,6 +207,7 @@ RegisterNUICallback(
               TriggerServerEvent("esx_trunk:putItem", secondData.plate, data.item.type, data.item.name, count, secondData.max, secondData.myVeh, data.item.label)
             elseif data.type == "property" then
               TriggerServerEvent("esx_property:putItem", secondData.owner, data.item.type, data.item.name, count)
+            end
         end
 
         Wait(500)
