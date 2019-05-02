@@ -206,7 +206,7 @@ RegisterNUICallback(
             if data.type == "trunk" then
               TriggerServerEvent("esx_trunk:putItem", secondData.plate, data.item.type, data.item.name, count, secondData.max, secondData.myVeh, data.item.label)
             elseif data.type == "property" then
-              TriggerServerEvent("esx_property:putItem", secondData.owner, data.item.type, data.item.name, count)
+              TriggerServerEvent("esx_property:putItem", secondData.owner, data.item.type, data.item.name, count, data.item.label)
             else
               print("Error unknown secondary inventory type")
             end
