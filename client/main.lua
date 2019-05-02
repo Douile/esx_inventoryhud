@@ -203,10 +203,12 @@ RegisterNUICallback(
                 count = GetAmmoInPedWeapon(PlayerPedId(), GetHashKey(data.item.name))
             end
 
-            if data.type == "truck" then
+            if data.type == "trunk" then
               TriggerServerEvent("esx_trunk:putItem", secondData.plate, data.item.type, data.item.name, count, secondData.max, secondData.myVeh, data.item.label)
             elseif data.type == "property" then
               TriggerServerEvent("esx_property:putItem", secondData.owner, data.item.type, data.item.name, count)
+            else
+              print("Error unknown secondary inventory type")
             end
         end
 
@@ -229,6 +231,8 @@ RegisterNUICallback(
               TriggerServerEvent("esx_trunk:getItem", secondData.plate, data.item.type, data.item.name, tonumber(data.number), secondData.max, secondData.myVeh)
             elseif data.type == "property" then
               TriggerServerEvent("esx_property:getItem",secondData.owner, data.item.type, data.item.name, tonumber(data.number))
+            else
+              print("Error unknown secondary inventory type")
             end
         end
 
