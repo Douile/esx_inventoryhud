@@ -494,7 +494,7 @@ end
 RegisterNetEvent("esx_inventoryhud:openPropertyInventory")
 AddEventHandler(
   "esx_inventoryhud:openPropertyInventory",
-  function(data, blackMoney, invite, weapons)
+  function(data, blackMoney, inventory, weapons)
     setSecondInventoryData(data, blackMoney, inventory, weapons)
     openSecondInventory("property")
   end
